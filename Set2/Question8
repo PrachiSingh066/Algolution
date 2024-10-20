@@ -1,0 +1,31 @@
+#include <iostream>
+#include <vector>
+using namespace std;
+int maxSumKConsecutive(const vector<int>& arr, int n, int k) {
+    if (k > n) {
+        cout << "Invalid" << endl;
+        return -1;
+    }
+    int maxSum = 0;
+    for (int i = 0; i < k; i++) {
+        maxSum += arr[i];
+    }
+    int currentSum = maxSum;
+    for (int i = k; i < n; i++) {
+        currentSum += arr[i] - arr[i - k]; 
+        maxSum = max(maxSum, currentSum); 
+    }
+    return maxSum;
+}
+int main() {
+    vector<int> arr1 = {100, 200, 300, 400};
+    int k1 = 2;
+    vector<int> arr2 = {1, 4, 2, 10, 23, 3, 1, 0, 20};
+    int k2 = 4;
+    vector<int> arr3 = {2, 3};
+    int k3 = 3;
+    cout << "Max sum of " << k1 << " consecutive elements: " << maxSumKConsecutive(arr1, arr1.size(), k1) << endl;
+    cout << "Max sum of " << k2 << " consecutive elements: " << maxSumKConsecutive(arr2, arr2.size(), k2) << endl;
+    cout << "Max sum of " << k3 << " consecutive elements: " << maxSumKConsecutive(arr3, arr3.size(), k3) << endl;
+    return 0;
+}
